@@ -20,6 +20,9 @@ using MeepMagick.Messages;
 
 namespace MeepMagick
 {
+    /// <summary>
+    /// Load an image and calculate basic properties and (optional) PHash
+    /// </summary>
     [MeepNamespace(Extensions.PluginNamespace)]
     public class Info : AMessageModule
     {
@@ -51,20 +54,24 @@ namespace MeepMagick
         {
             try
             {
-                using (var image = await ImageFromMessage(msg))
-                {
-                    if (image is null)
-                        return null;                       
+                var image = await ImageFromMessage(msg);
 
+                if (image is null)
+                    return null;
+
+                // Calculating the PHash can take some time
+                return await Task.Run<Message>(() =>
+                {
                     var imgMsg = new ImageMessage
                     {
                         DerivedFrom = msg,
+                        Name = this.Name,
                         Image = image,
                         PHash = IncludePHash ? image.PerceptualHash() : null
                     };
 
                     return imgMsg;
-                }
+                });
             }
             catch (MagickMissingDelegateErrorException dex)
             {

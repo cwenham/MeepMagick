@@ -25,6 +25,33 @@ namespace MeepMagick.Messages
         [XmlIgnore, JsonIgnore]
         public MagickImage Image { get; set; }
 
+        [Index(IsUnique = false)]
+        public int Width
+        {
+            get
+            {
+                return Image.Width;
+            }
+        }
+
+        [Index(IsUnique = false)]
+        public int Height
+        {
+            get 
+            {
+                return Image.Height;
+            }
+        }
+
+        [Index(IsUnique = false), MaxLength(5)]
+        public string Format
+        {
+            get
+            {
+                return Image.Format.ToString();
+            }
+        }
+
         /// <summary>
         /// Perceptual hash of image
         /// </summary>

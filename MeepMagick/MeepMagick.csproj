@@ -35,5 +35,11 @@
     <Reference Include="MeepLib">
       <HintPath>..\..\cwenham\Meep\MeepLib\bin\Debug\netstandard2.0\MeepLib.dll</HintPath>
     </Reference>
+    <Reference Include="MeepLib">
+      <HintPath>..\..\Meep\MeepLib\bin\Debug\netstandard2.0\MeepLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MeepModel">
+      <HintPath>..\..\Meep\MeepLib\bin\Debug\netstandard2.0\MeepModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
